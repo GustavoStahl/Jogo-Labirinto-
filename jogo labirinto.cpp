@@ -4,13 +4,13 @@
 #include <windows.h>
 int cima,baixo,direita,esquerda;
 
-/*função gotoxy*/
+/*funÃ§Ã£o gotoxy*/
 void gotoxy(int x, int y){
 	COORD pos={x, y};
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-/*função labirinto*/
+/*funÃ§Ã£o labirinto*/
 void mapa_labirinto(int *linha_inicial, int *coluna_inicial, int labirinto[30][30]){
 	gotoxy(0,0);
 	printf("\n\n\n\n");
@@ -36,7 +36,7 @@ void mapa_labirinto(int *linha_inicial, int *coluna_inicial, int labirinto[30][3
 		}
 }
 
-/*função main*/
+/*funÃ§Ã£o main*/
 int main(){
 /*labirinto 1*/
 	int labirinto1[30][30]{
@@ -92,6 +92,7 @@ int main(){
 		0,1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0
 	};
+	system("mode con: cols=80 lines=25");
 	char jogar_novamente;
 	for(int i=0; i<25; i++){
 		for(int j=0; j<80; j++){

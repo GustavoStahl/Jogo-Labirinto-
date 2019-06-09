@@ -1,20 +1,31 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
 int cima,baixo,direita,esquerda;
 
-/*função gotoxy*/
+//função gotoxy
 void gotoxy(int x, int y){
 	COORD pos={x, y};
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-/*função labirinto*/
+//função moldura
+void moldura(){
+	for(int i=0; i<25; i++){
+	for(int j=0; j<80; j++){
+		if(i==0||i==24||j==0||j==79)
+			printf("%c", 178);
+		else
+			printf(" ");
+		}
+	}
+}
+//função labirinto
 void mapa_labirinto(int *linha_inicial, int *coluna_inicial, int labirinto[30][30]){
 	gotoxy(0,0);
-	printf("\n\n\n\n");
-	printf("                         ");
+	gotoxy(25,4);
 	for(int i=0; i<15; i++){
 		for(int j=0; j<30; j++){
 			if(i==*linha_inicial && j==*coluna_inicial){
@@ -31,14 +42,13 @@ void mapa_labirinto(int *linha_inicial, int *coluna_inicial, int labirinto[30][3
 					printf(" ");
 				}
 			}
-		printf("\n");
-		printf("                         ");
+		gotoxy(25,4+(i+1));
 		}
 }
 
-/*função main*/
+//função main
 int main(){
-/*labirinto 1*/
+//labirinto 1
 	int labirinto1[30][30]{
 		0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
@@ -56,7 +66,7 @@ int main(){
 		0,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,
 		0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 		};
-/*Labirinto 2*/
+//Labirinto 2
 	int labirinto2[30][30]={
 		0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,0,
@@ -74,7 +84,7 @@ int main(){
 		0,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,0,1,1,1,1,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0
 	};
-/*Labirinto 3*/
+//Labirinto 3
 	int labirinto3[30][30]={
 		0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,1,1,0,1,0,1,1,1,1,0,
@@ -82,7 +92,7 @@ int main(){
 		0,1,0,1,1,1,1,0,1,1,1,0,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,
 		0,1,0,1,0,0,1,0,1,0,1,0,1,0,0,1,0,1,0,1,1,1,0,1,1,1,1,1,1,0,
 		0,1,0,1,1,0,1,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,0,0,0,1,0,0,0,0,
-		0,1,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,1,1,0,1,1,1,1,1,0,1,1,0,
+		0,1,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,1,1,1,1,1,0,1,1,0,
 		0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,0,0,0,0,0,1,0,0,0,1,0,
 		0,0,1,0,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,1,1,1,1,0,1,1,1,1,1,0,
 		0,1,1,0,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0,
@@ -92,16 +102,8 @@ int main(){
 		0,1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0
 	};
-	system("mode con: cols=80 lines=25");
 	char jogar_novamente;
-	for(int i=0; i<25; i++){
-		for(int j=0; j<80; j++){
-			if(i==0||i==24||j==0||j==79)
-				printf("%c", 219);
-			else
-				printf(" ");
-			}
-		}
+	moldura();
 	gotoxy(0,0);
 	gotoxy(1,1);
 	printf("%26cBem Vindo(a) ao labirinto!!", ' ');
@@ -110,19 +112,19 @@ int main(){
 	gotoxy(1,4);
 	printf("%31c%c%c%c%c%c%c%c", ' ', 218,196,196,196,196,196,191);
 	gotoxy(1,5);
-	printf("%31c|     |", ' ');
+	printf("%31c%c     %c", ' ',179,179);
 	gotoxy(1,6);
-	printf("%31c|  W  |", ' ');
+	printf("%31c%c  W  %c", ' ',179,179);
 	gotoxy(1,7);
-	printf("%31c|     |", ' ');
+	printf("%31c%c     %c", ' ',179,179);
 	gotoxy(1,8);
 	printf("%25c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c   %c%c%c%c%c%c%c", ' ', 218, 196, 196, 196, 196, 196, 197, 196, 196, 196, 196, 196, 197, 196, 196, 196, 196, 196, 191, 218, 196, 196, 196, 196, 196, 191);
 	gotoxy(1,9);
-	printf("%25c|     |     |     |   |     |", ' ');
+	printf("%25c%c     %c     %c     %c   %c     %c", ' ',179,179,179,179,179,179);
 	gotoxy(1,10);
-	printf("%25c|  A  |  S  |  D  |   |  X  |", ' ');
+	printf("%25c%c  A  %c  S  %c  D  %c   %c  X  %c", ' ',179,179,179,179,179,179);
 	gotoxy(1,11);
-	printf("%25c|     |     |     |   |     |", ' ');
+	printf("%25c%c     %c     %c     %c   %c     %c", ' ',179,179,179,179,179,179);
 	gotoxy(1,12);
 	printf("%25c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c   %c%c%c%c%c%c%c", ' ', 192, 196, 196, 196, 196, 196, 193, 196,196,196,196,196, 193, 196,196,196,196,196, 217, 192, 196,196,196,196,196, 217);
 	gotoxy(1,14);
@@ -187,6 +189,14 @@ int main(){
 				}
 			if(comando=='x' || comando=='X'){
 				system("cls");
+				for(int i=0; i<22; i++){
+					for(int j=0; j<80; j++){
+						if(i==0||i==21||j==0||j==79)
+							printf("%c", 178);
+						else
+							printf(" ");
+						}
+					}
 				gotoxy(35,10);
 				printf("Fim do jogo");
 				gotoxy(38,21);
@@ -201,17 +211,27 @@ int main(){
 				system("cls");
 			}
 		}while(mapa!=4);
+		moldura();
 		gotoxy(28,10);
 		printf("Parabens, voce venceu!!");
 		gotoxy(29,11);			
 		printf("Jogar novamente?(S/N)\n");
-		gotoxy(38,24);
+		gotoxy(0,0);
+		gotoxy(38,23);
 		do{
 		jogar_novamente = getch();
 		}while(jogar_novamente!='s' && jogar_novamente!='S' && jogar_novamente!='n' && jogar_novamente!='N');
 		
 	}while(jogar_novamente!='n' && jogar_novamente!='N');
 	system("cls");
+	for(int i=0; i<22; i++){
+		for(int j=0; j<80; j++){
+			if(i==0||i==21||j==0||j==79)
+				printf("%c", 178);
+			else
+				printf(" ");
+			}
+		}
 	gotoxy(35,10);
 	printf("Fim do jogo");
 	gotoxy(38,21);
